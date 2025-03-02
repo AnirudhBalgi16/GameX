@@ -6,6 +6,7 @@ export interface Platform{
     name:string;
     slug:string;
     
+    
 }
 
 export interface Game{
@@ -13,7 +14,7 @@ export interface Game{
     name:string;
     background_image:string;
     parent_platforms:{platform:Platform}[];
-    
+    metacritic:string
 }
 interface FetchGamesResponse{
     count:number;

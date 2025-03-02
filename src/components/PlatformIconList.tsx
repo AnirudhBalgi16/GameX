@@ -32,12 +32,12 @@ const IconMap: Record<string, IconType> = {
 const PlatformIconList = ({ platforms }: Props) => {
   return (
     <>
-    <HStack marginY='15px'>
+    <HStack marginY='15px' gap={4}>
       {platforms.map((platform) => (
-        <Icon
+        <Icon 
           key={platform.id}
           as={IconMap[platform.slug] || BsGlobe} // Ensure safe access
-          color="gray.500"
+          color="gray.400"
         />
       ))}
     </HStack>
