@@ -13,7 +13,7 @@ function App() {
      <Navbar />
     </GridItem> 
     {isLargeScreen && (
-        <GridItem area="aside" >
+        <GridItem area="aside"paddingX={2} >
          <GenreList />
         </GridItem>
       )} 

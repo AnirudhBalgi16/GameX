@@ -25,7 +25,10 @@ const useData = <T extends object>(endpoint: string) => {
                 setIsLoading(false);
             })
             .catch(err => {
-                if (err.name === 'AbortError') return;
+                if (err.name === 'AbortError' || err.code === 'ERR_CANCELED') {
+                    console.log('Request was canceled');
+                    return;
+                }
                 setError(err.message);
                 setIsLoading(false);
             });
