@@ -17,7 +17,7 @@ const PlatformSelector = ({onSelectPlatform,selectedPlatform}:Props) => {
     const {data}=usePlatform()
   return (
     <>
-    <MenuRoot ri>
+    <MenuRoot>
     <MenuTrigger asChild>
       <Button variant="outline" size="sm">
        {selectedPlatform?.name || "Platform"}
