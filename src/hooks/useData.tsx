@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import apiClient from "../services/api-client";
+import { AxiosRequestConfig } from "axios";
 
 export interface Genre{
     id:number;
@@ -11,7 +12,7 @@ export interface Genre{
     results: T[];
 }
 
-const useData = <T extends object>(endpoint: string) => {
+const useData = <T extends object>(endpoint: string, requestConfig?:AxiosRequestConfig, deps?:unknown[]) => {
     const [data, setData] = useState<T[]>([]);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +20,7 @@ const useData = <T extends object>(endpoint: string) => {
     useEffect(() => {
         const controller = new AbortController();
         setIsLoading(true);
-        apiClient.get<FetchDataResponse<T>>(endpoint, { signal: controller.signal })
+        apiClient.get<FetchDataResponse<T>>(endpoint, { signal: controller.signal ,...requestConfig})
             .then(res => {
                 setData(res.data.results); // Corrected to setData
                 setIsLoading(false);
@@ -33,8 +34,8 @@ const useData = <T extends object>(endpoint: string) => {
                 setIsLoading(false);
             });
 
-        return () => controller.abort(); // Cleanup function
-    }, [endpoint]); // Added endpoint as a dependency
+        return () => controller.abort(); 
+    }, deps ? [...deps]: []); 
 
     return { data, error, isLoading };
 }
